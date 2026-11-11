@@ -1,0 +1,15 @@
+CURRENCY DOWNLOAD TOOLKIT (versi komputer sendiri)
+
+PERTAMA KALI
+1. Ekstrak folder ini ke mana saja (mis. D:\Currency_Toolkit).
+2. Klik dua kali SETUP.bat  (sekali saja, butuh internet).
+
+SETIAP KALI PAKAI
+1. Klik dua kali JALANKAN.bat
+2. Browser terbuka otomatis. Pilih mata uang & periode di kiri, klik "Ambil Data".
+3. Selesai? Tutup jendela hitam (JALANKAN.bat).
+
+TIPS
+- Klik kanan JALANKAN.bat > Send to > Desktop (create shortcut) agar ada ikon di desktop.
+- Data yang sama tidak diambil ulang dari BI selama 1 jam (lebih cepat).
+- Jika port 8501 sedang dipakai, tutup jendela JALANKAN.bat lama lalu jalankan lagi.

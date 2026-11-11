@@ -1,0 +1,40 @@
+DEPLOY KE RENDER (gratis) - Currency Download Toolkit
+
+YANG DIBUTUHKAN: akun GitHub dan akun Render (render.com, login pakai GitHub).
+
+LANGKAH 1 - Taruh kode di GitHub
+  1. github.com > New repository > beri nama, mis. currency-toolkit (Public atau Private).
+  2. Klik "uploading an existing file", tarik ISI folder ini
+     (app.py, requirements.txt, render.yaml, folder .streamlit, dst.) lalu Commit.
+     Pastikan app.py berada langsung di halaman utama repo, bukan di dalam subfolder.
+
+LANGKAH 2 - Buat web service di Render
+  1. Dashboard Render > New > Web Service > pilih repo tadi.
+  2. Isi:
+       Language ........ Python 3
+       Region .......... Singapore
+       Build Command ... pip install -r requirements.txt
+       Start Command ... streamlit run app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+       Instance Type ... Free
+     Di Advanced > Health Check Path isi:  /_stcore/health
+  3. Create Web Service. Tunggu build sekitar 3-5 menit sampai status Live.
+  (Alternatif: New > Blueprint, pilih repo; Render membaca render.yaml otomatis.)
+
+LANGKAH 3 - Tes
+  Buka alamat https://NAMA-ANDA.onrender.com, pilih JPY > Satu Tahun > Ambil Data.
+  Jika muncul "Gagal mengambil data", buka "Detail error" dan kirim isinya ke Claude.
+  (Kemungkinan terburuk: BI menolak IP server Render. Jika begitu, pakai JALANKAN.bat di komputer.)
+
+LANGKAH 4 - Supaya tidak tidur
+  Render mematikan layanan gratis yang 15 menit tidak ada kunjungan (bangun lagi ~30-60 detik).
+  1. Buat akun gratis di cron-job.org.
+  2. Create cronjob:
+       URL ........ https://NAMA-ANDA.onrender.com/_stcore/health
+       Jadwal ..... setiap 14 menit
+  3. Simpan. Selama ping berjalan, layanan tetap menyala.
+
+CATATAN
+  - Jatah gratis Render 750 jam/bulan per akun. Satu layanan menyala 24 jam penuh = sekitar 744 jam
+    (hampir habis). Jika punya layanan gratis lain, batasi jadwal ping ke jam kerja saja
+    (mis. 06.00-22.00 WIB) di cron-job.org.
+  - Server tidak menyimpan data; file Excel/CSV diunduh langsung ke komputer Anda lewat browser.
